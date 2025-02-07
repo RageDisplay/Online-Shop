@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewtype" content="width=device-width, initial-scale=1.0">
+        <title>Shopping shop</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css')}}">
+    </head>
+    <body>
+        <header>
+            <h1>Интернет-магазин</h1>
+            {% if session.get('username') %}
+                <p>Привет пользователь {{ session['username']}} | <a href="/logout">Выйти</a></p>
+            {% else %}
+                <p><a href="/login">Войти</a> | <a href="/register">Регистрация</a></p>
+            {% endif %}
+            <div class="cart" id="cartButton">Корзина (<span id="cartCount">0</span>)</div>
+        </header>
+
+        <main>
+            <div class="product" data-name="Чай" data-price="400">
+                <h2>Чай</h2>
+                <p>Цена: 400 руб.</p>
+                <button class="addToCart">Добавить в корзину</button>
+            </div>
+            <div class="product" data-name="Кофе" data-price="600">
+                <h2>Кофе</h2>
+                <p>Цена: 600 руб.</p>
+                <button class="addToCart">Добавить в корзину</button>
+            </div>
+            <div class="product" data-name="Конфеты" data-price="300">
+                <h2>Конфеты</h2>
+                <p>Цена: 300 руб.</p>
+                <button class="addToCart">Добавить в корзину</button>
+            </div>
+        </main>
+
+        <div id="cartModal" class="modal">
+            <div class="modal-content">
+                <span class="close">X</span>
+                <h2>Состав корзины</h2>
+                <ul id="cartItems"></ul>
+                <p id="totalPrice">Итого: 0 руб.</p>
+                <button id="submitOrder">Отправить заказ</button>
+            </div>
+        </div>
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+    </body>
+</html>
